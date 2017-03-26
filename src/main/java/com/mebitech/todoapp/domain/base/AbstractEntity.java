@@ -10,11 +10,9 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Where;
-
 @MappedSuperclass
 public abstract class AbstractEntity {
-	
+		
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +28,15 @@ public abstract class AbstractEntity {
 
 	@Column(name = "RECORD_IS_DELETED")
 	private Boolean recordIsDeleted;
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Date getRecordCreateTime() {
 		return recordCreateTime;

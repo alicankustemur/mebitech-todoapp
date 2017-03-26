@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html>		
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>		
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>		
 <html>
-<head lang="en">
+<head lang="tr">
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${title}</title>
-<!--     <link rel="stylesheet" href="css/main.css" /> -->
+    <title>Mebitech Todo App</title>
+    <link rel="stylesheet" href="css/main.css" />
    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap-table/3.1.1/react-bootstrap-table-all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

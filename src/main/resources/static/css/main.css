@@ -1,0 +1,8 @@
+.navbar{
+	border-radius:0 !important;
+}
+
+.employeeTable, .departmentTable , .meetingTable{
+	position: absolute;
+	top: 100px;
+}

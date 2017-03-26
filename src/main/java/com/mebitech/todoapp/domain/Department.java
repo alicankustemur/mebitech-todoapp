@@ -1,10 +1,10 @@
 package com.mebitech.todoapp.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,18 +16,19 @@ import com.mebitech.todoapp.domain.base.AbstractEntity;
 @Entity
 @Table(name = "DEPARTMENT")
 @Where(clause = "RECORD_IS_DELETED = 0")
-public class Department extends AbstractEntity {
-
+public class Department extends AbstractEntity implements Serializable {
+	
 	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "EMPLOYEE")
 	private Employee employee;
-
+	
+	
 	public String getName() {
 		return name;
 	}

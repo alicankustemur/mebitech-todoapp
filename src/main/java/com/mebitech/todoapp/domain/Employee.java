@@ -2,9 +2,6 @@ package com.mebitech.todoapp.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
@@ -14,8 +11,19 @@ import com.mebitech.todoapp.domain.base.AbstractEntity;
 @Entity
 @Table(name = "EMPLOYEE")
 @Where(clause = "RECORD_IS_DELETED = 0")
-public class Employee extends AbstractEntity {
-
+public class Employee extends AbstractEntity{
+	
+	public Employee(String name, String surname, Float salary) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.salary = salary;
+	}
+	
+	public Employee(){
+		
+	}
+	
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
@@ -23,8 +31,8 @@ public class Employee extends AbstractEntity {
 	private String surname;
 
 	@Column(name = "SALARY", nullable = false)
-	private String salary;
-
+	private Float salary;
+	
 	public String getName() {
 		return name;
 	}
@@ -41,11 +49,11 @@ public class Employee extends AbstractEntity {
 		this.surname = surname;
 	}
 
-	public String getSalary() {
+	public Float getSalary() {
 		return salary;
 	}
 
-	public void setSalary(String salary) {
+	public void setSalary(Float salary) {
 		this.salary = salary;
 	}
 

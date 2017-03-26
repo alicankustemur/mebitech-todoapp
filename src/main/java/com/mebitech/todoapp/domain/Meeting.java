@@ -17,7 +17,7 @@ import com.mebitech.todoapp.domain.base.AbstractEntity;
 @Table(name = "MEETING")
 @Where(clause = "RECORD_IS_DELETED = 0")
 public class Meeting extends AbstractEntity {
-
+	
 	@Column(name = "NAME")
 	private String name;
 
@@ -27,7 +27,7 @@ public class Meeting extends AbstractEntity {
 	@ManyToOne
 	@JoinColumn(name = "DEPARTMENT")
 	private Department department;
-
+	
 	public String getName() {
 		return name;
 	}
