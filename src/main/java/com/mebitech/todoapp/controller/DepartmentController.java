@@ -56,16 +56,21 @@ public class DepartmentController {
 							  @RequestParam("name") String name,
 							  @RequestParam("description") String description,
 							  @RequestParam("employee") Long employeeId){
-		Department department = new Department();
-		department.setName(name);
-		department.setDescription(description);
-		department.setRecordIsDeleted(false);
 		Employee employee = employeeService.get(employeeId);
-		department.setEmployee(employee);
-		department.setRecordCreateTime(new Date());
+		Department oldDepartment = service.getDepartmentByEmployee(employee);
 		
-		service.saveOrUpdate(department);
-		
+		if(oldDepartment == null){
+			Department department = new Department();
+			department.setName(name);
+			department.setDescription(description);
+			department.setRecordIsDeleted(false);
+			department.setEmployee(employee);
+			department.setRecordCreateTime(new Date());
+			
+			service.saveOrUpdate(department);
+		}else{
+			return "redirect:/department?error=availableDepartment";
+		}
 		return "redirect:/department";
 	}
 	
@@ -88,5 +93,11 @@ public class DepartmentController {
 		return "redirect:/department";
 	}
 	
+	
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	@ResponseBody
+	public String error(String error){
+		return error;
+	}
 
 }

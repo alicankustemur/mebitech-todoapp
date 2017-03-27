@@ -9,6 +9,39 @@ var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Panel = ReactBootstrap.Panel;
 var DropdownButton = ReactBootstrap.DropdownButton;
+var Alert = ReactBootstrap.Alert;
+
+class AlertDepartment extends React.Component{
+  constructor() {
+    super();
+  };
+	
+  render(){
+      return (
+        <Alert bsStyle="danger" onDissmiss={this.handleAlertShow} >
+            <h4>Message:</h4>
+            <p>This department is available with entered employee, you can not add it again.</p>
+        </Alert>
+
+      );
+  }
+
+}
+
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
+function removeParam(uri, keyValue) {
+      var re = new RegExp("([&\?]"+ keyValue + "*$|" + keyValue + "&|[?&]" + keyValue + "(?=#))", "i"); 
+      return uri.replace(re, '');
+    }
 
 class AddDepartment extends React.Component {
 
@@ -19,6 +52,7 @@ class AddDepartment extends React.Component {
 
   addDepartmentOnComplete() {
     if($(".addDepartmentButton").hasClass("btn-success") || $(".cleDepartmentButton").click() ){
+        
       $("input[name='name']").val("");
       $("textarea[name='description']").val("");
 
@@ -34,7 +68,10 @@ class AddDepartment extends React.Component {
         .text("Add");
 
       $("select[name='employee'] option").prop("selected",false);
-
+      
+      if($.urlParam('error') == "availableDepartment"){
+        location.href = removeParam(location.href,"error=availableDepartment");
+      }
     }
 
   }
@@ -48,10 +85,16 @@ class AddDepartment extends React.Component {
       }else{
         employees.push(<option key={index++} value={employee.id}>{employee.name}</option>);   
       }
-      
     });
+
+    var alertDepartment = null;
+    if($.urlParam('error') == "availableDepartment"){
+        alertDepartment = <AlertDepartment />;
+    }
+
     return(
     <Col lg={6}>
+      {alertDepartment}
       <Panel bsStyle="primary" header="Add Department" className="addDepartmentPanel">
       <Form horizontal name="addDepartmentForm" method="POST" action="department/add">
         <FormGroup>
