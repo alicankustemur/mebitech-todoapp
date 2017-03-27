@@ -31,18 +31,6 @@ public class MeetingController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
-		if(service.getAll().size() == 0){
-			Meeting meeting = new Meeting();
-			meeting.setName("Meeting-1");
-			meeting.setDescription("The novel The Lord of the Rings includes as major characters the hobbits "
-					+ "Frodo Baggins, Samwise Gamgee, Peregrin Took, and Meriadoc Brandybuck, as well as several other minor hobbit characters.");
-			Department department = departmentService.get(1L);
-			meeting.setDepartment(department);
-			meeting.setRecordIsDeleted(false);
-			meeting.setRecordCreateTime(new Date());
-			
-			service.saveOrUpdate(meeting);
-		}
 		modelAndView.setViewName("meeting");
 		return modelAndView;
 	}

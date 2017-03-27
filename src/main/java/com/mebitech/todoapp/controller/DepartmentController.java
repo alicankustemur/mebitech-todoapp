@@ -29,17 +29,6 @@ public class DepartmentController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
-		if(service.getAll().size() == 0){
-			Department department  = new Department();
-			department.setName("Baggins");
-			department.setDescription("The Baggins clan traced their origin to the first recorded Baggins, one Balbo Baggins, who was born in or near Hobbiton in S.R. 1167.");
-			Employee employee = employeeService.get(1L);
-			department.setEmployee(employee);
-			department.setRecordIsDeleted(false);
-			department.setRecordCreateTime(new Date());
-			
-			service.saveOrUpdate(department);
-		}
 		modelAndView.setViewName("department");
 		return modelAndView;
 	}

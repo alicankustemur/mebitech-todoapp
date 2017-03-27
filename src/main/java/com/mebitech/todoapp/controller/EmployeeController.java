@@ -24,30 +24,8 @@ public class EmployeeController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
-		if(service.getAll().size() == 0){
-			Employee employee = new Employee("Frodo","Baggins",10f);
-			employee.setRecordIsDeleted(false);
-			employee.setRecordCreateTime(new Date());
-			
-			service.saveOrUpdate(employee);
-			
-			employee = new Employee("Bilbo","Baggins",15f);
-			employee.setRecordIsDeleted(false);
-			employee.setRecordCreateTime(new Date());
-			
-			service.saveOrUpdate(employee);
-			
-			employee = new Employee("Gandalf","the Grey",100f);
-			employee.setRecordIsDeleted(false);
-			employee.setRecordCreateTime(new Date());
-			
-			service.saveOrUpdate(employee);
-			
-		}
-		
 		modelAndView.addObject("title","Mebitech Todo App - Employees");
 		modelAndView.setViewName("employee");
-		
 		return modelAndView;
 	}
 	
