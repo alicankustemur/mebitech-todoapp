@@ -57,9 +57,8 @@ public class DepartmentController {
 							  @RequestParam("description") String description,
 							  @RequestParam("employee") Long employeeId){
 		Employee employee = employeeService.get(employeeId);
-		Department oldDepartment = service.getDepartmentByEmployee(employee);
 		
-		if(oldDepartment == null){
+		if(!service.isItAvailableDepartmentWithThisEmployee(employee)){
 			Department department = new Department();
 			department.setName(name);
 			department.setDescription(description);

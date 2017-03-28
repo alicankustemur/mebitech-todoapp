@@ -26,4 +26,15 @@ public class DepartmentServiceImpl extends AbstractBaseServiceImpl<Department, L
 		return repository.findByEmployee(employee);
 	}
 
+	@Override
+	public boolean isItAvailableDepartmentWithThisEmployee(Employee employee) {
+		Department department = repository.findByEmployee(employee);
+
+		if (department != null) {
+			return true;
+		}
+		
+		return false;
+	}
+
 }

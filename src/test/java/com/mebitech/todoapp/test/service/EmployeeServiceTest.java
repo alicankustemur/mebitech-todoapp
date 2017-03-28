@@ -39,7 +39,6 @@ public class EmployeeServiceTest {
 		Employee employee = getEmployee();
 		when(repository.findOne(employee.getId())).thenReturn(null);
 		when(repository.save(employee)).thenReturn(employee);
-
 		Employee gettingEmployee = service.saveOrUpdate(employee).orElse(new Employee());
 
 		assertThat(gettingEmployee.getId(), is(equalTo(employee.getId())));

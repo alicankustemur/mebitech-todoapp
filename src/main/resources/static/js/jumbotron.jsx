@@ -4,8 +4,8 @@ class Jumbotron extends React.Component {
   		<div className="jumbotron">
 	      <div className="container">
 	        <h1>Hello, world!</h1>
-	        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-	        <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+	        <p>This is a simple Todo application.Create employees, departments and meetings.Your created employees assign to one department and this departments assign to any meetings. </p>
+	        <p><a className="btn btn-primary btn-lg" target="_blank" href="http://alicankustemur.github.io" role="button">go to my blog. »</a></p>
 	      </div>
 	    </div>
   	);

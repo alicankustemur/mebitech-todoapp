@@ -24,13 +24,13 @@ public class Employee extends AbstractEntity{
 		
 	}
 	
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "SURNAME", nullable = false)
+	@Column(name = "SURNAME")
 	private String surname;
 
-	@Column(name = "SALARY", nullable = false)
+	@Column(name = "SALARY")
 	private Float salary;
 	
 	public String getName() {
