@@ -35,7 +35,7 @@ public class DepartmentController {
 	
 	@RequestMapping(value = "/departments", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Department> employees(ModelAndView modelAndView) {
+	public List<Department> employees() {
 		return service.getAll();
 	}
 	
@@ -80,15 +80,19 @@ public class DepartmentController {
 							  @RequestParam("description") String description,
 							  @RequestParam("employee") Long employeeId){
 		
-		Department department = service.get(id);
-		department.setName(name);
-		department.setDescription(description);
-		Employee employee = employeeService.get(employeeId);
-		department.setEmployee(employee);
-		department.setRecordUpdateTime(new Date());
-			
-		service.saveOrUpdate(department);
 		
+		Employee employee = employeeService.get(employeeId);
+		if(!service.isItAvailableDepartmentWithThisEmployee(employee)){
+			Department department = service.get(id);
+			department.setName(name);
+			department.setDescription(description);
+			department.setEmployee(employee);
+			department.setRecordUpdateTime(new Date());
+			
+			service.saveOrUpdate(department);
+		}else{
+			return "redirect:/department?error=availableDepartment";
+		}
 		return "redirect:/department";
 	}
 	

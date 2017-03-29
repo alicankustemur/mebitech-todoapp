@@ -37,7 +37,7 @@ public class MeetingController {
 	
 	@RequestMapping(value = "/meetings", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Meeting> meetings(ModelAndView modelAndView) {
+	public List<Meeting> meetings() {
 		return service.getAll();
 	}
 	

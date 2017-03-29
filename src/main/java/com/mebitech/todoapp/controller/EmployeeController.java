@@ -31,7 +31,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/employees", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Employee> employees(ModelAndView modelAndView) {
+	public List<Employee> employees() {
 		return service.getAll();
 	}
 	
