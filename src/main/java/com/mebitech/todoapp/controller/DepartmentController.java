@@ -35,12 +35,12 @@ public class DepartmentController {
 	
 	@RequestMapping(value = "/departments", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Department> employees() {
+	public List<Department> departments() {
 		return service.getAll();
 	}
 	
 	@RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
-	public String deleteEmployee(@PathVariable("id") Long id){
+	public String deleteDepartment(@PathVariable("id") Long id){
 		
 		Department department = service.get(id);
 		department.setRecordIsDeleted(true);
@@ -96,11 +96,4 @@ public class DepartmentController {
 		return "redirect:/department";
 	}
 	
-	
-	@RequestMapping(value = "/error", method = RequestMethod.GET)
-	@ResponseBody
-	public String error(String error){
-		return error;
-	}
-
 }

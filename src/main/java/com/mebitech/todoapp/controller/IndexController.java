@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mebitech.todoapp.service.CreateTestData;
+import com.mebitech.todoapp.service.CreateTestDataService;
 
 @Controller
 public class IndexController {
 	
 	@Autowired
-	private CreateTestData createTestData;
+	private CreateTestDataService createTestData;
 	
 	@RequestMapping("/")
 	public ModelAndView index(ModelAndView modelAndView) {

@@ -1,12 +1,23 @@
 package com.mebitech.todoapp.test.controller;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,30 +25,122 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.mebitech.todoapp.Application;
+import com.mebitech.todoapp.controller.DepartmentController;
+import com.mebitech.todoapp.controller.MeetingController;
+import com.mebitech.todoapp.domain.Department;
+import com.mebitech.todoapp.domain.Employee;
+import com.mebitech.todoapp.domain.Meeting;
+import com.mebitech.todoapp.service.DepartmentService;
+import com.mebitech.todoapp.service.MeetingService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class MeetingControllerTest {
 
-	@Autowired
 	private MockMvc mockMvc;
+	
+	@Mock
+	private DepartmentService departmentService;
+	
+	@Mock
+	private MeetingService service;
 
+	@InjectMocks
+	@Autowired
+	private MeetingController controller;
+
+	@Autowired
+	private WebApplicationContext wac;
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	}
+	
+	
 	@Test
-	public void index() throws Exception {
+	public void testGetAllMeetings() throws Exception {
+		List<Meeting> list = new ArrayList<Meeting>();
+		list.add(new Meeting());
+		list.add(new Meeting());
+		list.add(new Meeting());
+		list.add(new Meeting());
 		
-		this.mockMvc.perform(get("/meeting"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("meeting"));
+		when(service.getAll()).thenReturn(list);
+		
+		mockMvc.perform(get("/meeting/meetings")
+		   .contentType(MediaType.APPLICATION_JSON))
+	       .andExpect(jsonPath("$.*", hasSize(4)))
+	       .andExpect(status().isOk());
 	}
 	
 	@Test
-	public void testEmployeeList() throws Exception{
-		this.mockMvc.perform(get("/meeting/meetings")
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
+	public void testDeleteMeeting() throws Exception{
+		Meeting meeting = new Meeting();
+		meeting.setId(1L);
+		meeting.setName("Meeting 1");
+		
+		when(service.get(1L)).thenReturn(meeting);
+		
+		mockMvc.perform(get("/meeting/delete/{id}",1L))
+						.andExpect(status().is3xxRedirection())
+				        .andExpect(view().name("redirect:/meeting"))
+				        .andExpect(handler().handlerType(MeetingController.class))
+				        .andExpect(handler().methodName("deleteMeeting"))
+				        .andReturn();
 	}
-
+	
+	@Test
+	public void testAddMeeting() throws Exception{
+		Department department = new Department();
+		department.setId(1L);
+		department.setName("Department 1");
+		
+		when(departmentService.get(1L)).thenReturn(department);
+		
+		mockMvc.perform(post("/meeting/add")
+				.param("name", "Meeting 1")
+				.param("description", "Lorem ipsum dolor sit amet")
+				.param("department", "1"))
+				.andExpect(status().is3xxRedirection())
+		        .andExpect(view().name("redirect:/meeting"))
+		        .andExpect(handler().handlerType(MeetingController.class))
+		        .andExpect(handler().methodName("addMeeting"))
+		        .andReturn();
+		
+	}
+	
+	
+	@Test
+	public void testUpdateMeeting() throws Exception{
+		Meeting meeting = new Meeting();
+		meeting.setId(1L);
+		meeting.setName("Meeting 1");
+		
+		Department department = new Department();
+		department.setId(1L);
+		
+		when(service.get(1L)).thenReturn(meeting);
+		when(departmentService.get(1L)).thenReturn(department);
+		
+		mockMvc.perform(post("/meeting/update")
+				.param("id", "1")
+				.param("name", "Meeting 1")
+				.param("description", "Lorem ipsum dolor sit amet")
+				.param("department", "1"))
+				.andExpect(status().is3xxRedirection())
+		        .andExpect(view().name("redirect:/meeting"))
+		        .andExpect(handler().handlerType(MeetingController.class))
+		        .andExpect(handler().methodName("updateMeeting"))
+		        .andReturn();
+		
+	}
+	
+	
 }
