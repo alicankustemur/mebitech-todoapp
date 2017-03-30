@@ -48,10 +48,9 @@ public class IndexControllerTest {
 		this.mockMvc.perform(get("/"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("index"))
-			.andExpect(status().is3xxRedirection())
             .andExpect(handler().handlerType(IndexController.class))
             .andExpect(handler().methodName("index"))
-            .andReturn();;
+            .andReturn();
 	}
 
 }
