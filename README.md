@@ -41,6 +41,7 @@ mvn -Dtest=IndexControllerTest  test
 mvn -Dtest=EmployeeControllerTest  test
 mvn -Dtest=DepartmentControllerTest  test
 mvn -Dtest=MeetingControllerTest  test
+mvn -Dtest=CreateTestDataServiceTest  test
 mvn -Dtest=EmployeeServiceTest  test
 mvn -Dtest=DepartmentServiceTest  test
 mvn -Dtest=MeetingServiceTest  test
