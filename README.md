@@ -28,7 +28,7 @@ java -jar mebitech-todoapp.jar
 
 ### Run
 
-Run **MySQL** and  and go to [http://localhost:8082/mebitech-todoapp/] 
+Run **MySQL** and go to [http://localhost:8082/mebitech-todoapp/] 
 
 Call these commands for running test classes.
 
