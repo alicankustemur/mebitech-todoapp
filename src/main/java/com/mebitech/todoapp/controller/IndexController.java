@@ -16,7 +16,6 @@ public class IndexController {
 	@RequestMapping("/")
 	public ModelAndView index(ModelAndView modelAndView) {
 		createTestData.create();
-		modelAndView.addObject("title","Mebitech Todo App");
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}

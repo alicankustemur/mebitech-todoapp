@@ -24,7 +24,6 @@ public class EmployeeController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
-		modelAndView.addObject("title","Mebitech Todo App - Employees");
 		modelAndView.setViewName("employee");
 		return modelAndView;
 	}
