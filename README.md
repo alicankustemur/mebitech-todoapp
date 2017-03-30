@@ -2,7 +2,7 @@
 
  This is a simple **Spring Boot** and **React** project.
  
- The goal of the project ; save employees, departments and meetings information to using basic database operations.
+ The goal of the project ; save **employees**, **departments** and **meetings** information to using basic database operations.
  
 
 ## Requirements
