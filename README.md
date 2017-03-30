@@ -4,7 +4,7 @@
  
  The goal of the project ; save **employees**, **departments** and **meetings** information to using basic database operations.
  
-
+ ![MebitechTodoApp Screenshoot](http://alicankustemur.github.io/images/others/mebitech-todoapp.PNG)
 ## Requirements
 
 ### Build
